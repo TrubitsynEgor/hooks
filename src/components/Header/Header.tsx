@@ -6,10 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 interface HeaderProps extends DetailsDivProps { }
 
 export const Header = ({ className, ...props }: HeaderProps) => {
-
   const { isAuth, setAuth } = useAuth()
-
-  console.log(isAuth);
 
   const login = () => {
     setAuth(true)
