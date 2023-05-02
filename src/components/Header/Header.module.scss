@@ -5,6 +5,11 @@
 
 }
 
+.dark {
+	background-color: var(--dark);
+	color: var(--light);
+}
+
 .container {
 	display: flex;
 	align-items: center;

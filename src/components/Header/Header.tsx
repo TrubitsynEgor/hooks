@@ -5,6 +5,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useState } from 'react';
 import { addProduct, removeProduct } from '@/store/productsSlice/productsSlice';
+import { useActions } from '@/hooks/useActions';
 
 interface HeaderProps extends DetailsDivProps { }
 
@@ -17,6 +18,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
   //Redux
   const { products } = useAppSelector(state => state.products)
   const dispatch = useAppDispatch()
+  const { removeProduct } = useActions()
 
   // Context logic
   const login = () => {
@@ -32,11 +34,13 @@ export const Header = ({ className, ...props }: HeaderProps) => {
     setValue('')
   }
   const removeProductOnClick = (el: string) => {
-    dispatch(removeProduct(el))
+    removeProduct(el)
   }
 
   return (
-    <div className={cn(styles.header, className)} {...props}>
+    <div className={cn(styles.header, className, {
+      [styles.dark]: isAuth
+    })} {...props}>
       <div className={styles.container}>
         <h1>Header</h1>
         {products.map(el => <li onClick={() => removeProductOnClick(el)} key={el}>{el}</li>)}
