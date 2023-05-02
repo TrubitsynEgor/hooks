@@ -6,6 +6,9 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useState } from 'react';
 import { addProduct, removeProduct } from '@/store/productsSlice/productsSlice';
 import { useActions } from '@/hooks/useActions';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useOutside } from '@/hooks/useOutside';
+import { Modal } from '../Modal/Modal';
 
 interface HeaderProps extends DetailsDivProps { }
 
@@ -20,6 +23,11 @@ export const Header = ({ className, ...props }: HeaderProps) => {
   const dispatch = useAppDispatch()
   const { removeProduct } = useActions()
 
+  //localStorage
+  const [product, setProduct] = useLocalStorage('products', products)
+
+  //useOutside
+  const { ref, isVisible, setVisible } = useOutside(false)
   // Context logic
   const login = () => {
     setAuth(true)
@@ -51,7 +59,12 @@ export const Header = ({ className, ...props }: HeaderProps) => {
         {isAuth
           ? <button onClick={logout}>Login out</button>
           : <button onClick={login}>Login in</button>}
+
+        <button onClick={() => setVisible(true)}>OpenModal</button>
       </div>
+
+
+      {isVisible && < Modal ref={ref} />}
     </div>
   )
 };
