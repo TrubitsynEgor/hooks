@@ -9,4 +9,4 @@
 - В папке hooks файл redux.ts создадим наши хуки и типизируем их: 
   - **export const useAppDispatch = () => useDispatch<AppDispatch>();**
   - **export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;**
-Теперь мы можем использовать хуки для доступа к нашему store без необходимости постоянно типизировать их. 
+<br> Теперь мы можем использовать хуки для доступа к нашему store без необходимости постоянно типизировать их. 
